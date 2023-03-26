@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>oz</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <h1>oz</h1>
+  </body>
+</html>
+body {
+  background-color: black;
+}
+@keyframes lightning {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+function generateLightning() {
+  var elements = document.getElementsByTagName('body')[0].children;
+  var randomIndex = Math.floor(Math.random() * elements.length);
+  var element = elements[randomIndex];
+  element.classList.add('lightning');
+  setTimeout(function() {
+    element.classList.remove('lightning');
+  }, 200);
+}
+setInterval(generateLightning, 2000);
+.raindrop {
+  position: absolute;
+  width: 3px;
+  height: 15px;
+  background-color: #00BFFF;
+  animation: fall 0.75s linear infinite;
+}
+
+@keyframes fall {
+  from {top: -20px;}
+  to {top: 100%;}
+}
+function generateRaindrops() {
+  var drop = document.createElement('div');
+  drop.className = 'raindrop';
+  drop.style.left = Math.random() * window.innerWidth + 'px';
+  document.body.appendChild(drop);
+  setTimeout(function() {
+   

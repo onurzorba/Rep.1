@@ -16,6 +16,10 @@ body {
   from {opacity: 0;}
   to {opacity: 1;}
 }
+@keyframes fall {
+  from {top: -20px;}
+  to {top: 100%;}
+}
 </style>
 <script>
 function generateLightning() {
@@ -36,10 +40,7 @@ setInterval(generateLightning, 2000);
   animation: fall 0.75s linear infinite;
 }
 
-@keyframes fall {
-  from {top: -20px;}
-  to {top: 100%;}
-}
+
 function generateRaindrops() {
   var drop = document.createElement('div');
   drop.className = 'raindrop';

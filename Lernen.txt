@@ -1,2 +1,0 @@
-1. Javascript tutorials
-2. NodeJS kannst du dir angucken (Damit kann man javascript ohne website ausführen auf deinem PC. Ähnlich wie Python funktioniert das dann.)

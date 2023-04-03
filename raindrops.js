@@ -47,5 +47,17 @@ function drawRaindrops() {
   requestAnimationFrame(drawRaindrops);
 }
 
-// Call the drawRaindrops function to start the animation
-drawRaindrops();
+// Draw the lightning bolt on the canvas
+function drawLightning(x, y) {
+  // Create a gradient for the lightning bolt shine
+  var gradient = ctx.createRadialGradient(x, y, 0, x, y, 20);
+  gradient.addColorStop(0, "rgba(128, 0, 128, 0.5)");
+  gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+  // Draw the lightning bolt
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 20, y + 40);
+  ctx.lineTo(x + 10, y + 40);
+  ctx.lineTo(x + 30, y + 80);
+  ctx.lineTo(x + 10

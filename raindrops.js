@@ -60,4 +60,4 @@ function drawLightning(x, y) {
   ctx.lineTo(x + 20, y + 40);
   ctx.lineTo(x + 10, y + 40);
   ctx.lineTo(x + 30, y + 80);
-  ctx.lineTo(x + 10
+  ctx.lineTo(x + 10);

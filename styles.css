@@ -1,44 +1,66 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #292929;
 }
 
 canvas {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
-}
-
-.flash {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  background-color: rgba(65, 0, 150, 0.5);
-  pointer-events: none;
-  animation: flash 0.5s linear;
 }
 
-@keyframes flash {
+.raindrop {
+  position: absolute;
+  width: 3px;
+  height: 10px;
+  background-color: #fff;
+  animation: fall linear infinite;
+  transform: translateY(-10px);
+  opacity: 0.5;
+}
+
+@keyframes fall {
   0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
+    transform: translateY(-10px);
   }
   100% {
-    opacity: 0;
+    transform: translateY(800px);
   }
 }
 
-canvas {
-  position: fixed;
+.lightning {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.lightning.active {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lightning:before,
+.lightning:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #6c5ce7;
+}
+
+.lightning:before {
+  transform: translate(-50%, -100%) rotate(-45deg);
+}
+
+.lightning:after {
+  transform: translate(-50%, -100%) rotate(45deg);
 }

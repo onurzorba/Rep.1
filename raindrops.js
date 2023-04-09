@@ -1,63 +1,66 @@
-// Get the canvas element
-var canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let drops = [];
 
-// Set the canvas width and height to the window width and height
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+class Drop {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.len = Math.random() * 80 + 80;
+    this.speed = Math.random() * 2 + 3;
+    this.size = Math.random() * 3 + 1;
+  }
 
-// Get the canvas context
-var ctx = canvas.getContext("2d");
+  update() {
+    this.y += this.speed;
 
-// Create an array of raindrops
-var drops = [];
-for (var i = 0; i < 100; i++) {
-  drops.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    speed: 2 + Math.random() * 2,
-    length: 5 + Math.random() * 10
-  });
-}
-
-// Draw the raindrops on the canvas
-function drawRaindrops() {
-  // Clear the canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Loop through the raindrops array
-  for (var i = 0; i < drops.length; i++) {
-    // Draw the raindrop
-    ctx.beginPath();
-    ctx.moveTo(drops[i].x, drops[i].y);
-    ctx.lineTo(drops[i].x, drops[i].y + drops[i].length);
-    ctx.strokeStyle = "#fff";
-    ctx.stroke();
-
-    // Move the raindrop down the screen
-    drops[i].y += drops[i].speed;
-
-    // If the raindrop reaches the bottom of the screen, reset its position
-    if (drops[i].y > canvas.height) {
-      drops[i].x = Math.random() * canvas.width;
-      drops[i].y = 0;
+    if (this.y > canvas.height) {
+      this.y = Math.random() * -canvas.height;
+      this.x = Math.random() * canvas.width;
     }
   }
 
-  // Call this function again to animate the raindrops
-  requestAnimationFrame(drawRaindrops);
+  draw() {
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x, this.y + this.len);
+    ctx.strokeStyle = "#03a9f4";
+    ctx.lineWidth = this.size;
+    ctx.stroke();
+  }
 }
 
-// Draw the lightning bolt on the canvas
-function drawLightning(x, y) {
-  // Create a gradient for the lightning bolt shine
-  var gradient = ctx.createRadialGradient(x, y, 0, x, y, 20);
-  gradient.addColorStop(0, "rgba(128, 0, 128, 0.5)");
-  gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+function createDrops(num) {
+  for (let i = 0; i < num; i++) {
+    drops.push(new Drop());
+  }
+}
 
-  // Draw the lightning bolt
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctx.lineTo(x + 20, y + 40);
-  ctx.lineTo(x + 10, y + 40);
-  ctx.lineTo(x + 30, y + 80);
-  ctx.lineTo(x + 10);
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < drops.length; i++) {
+    drops[i].update();
+    drops[i].draw();
+  }
+}
+
+createDrops(50);
+animate();
+
+function createLightning() {
+  const flash = document.createElement("div");
+  flash.classList.add("flash");
+  document.body.appendChild(flash);
+  setTimeout(() => {
+    flash.remove();
+  }, 500);
+}
+
+setInterval(() => {
+  const chance = Math.random();
+  if (chance < 0.05) {
+    createLightning();
+  }
+}, 5000);

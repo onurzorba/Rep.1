@@ -1,40 +1,36 @@
-#canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-      }
-      body {
-        background-color: #222;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        margin: 0;
-        padding: 0;
-      }
-
-      h1, p {
-        margin: 20px;
-      }
-
-      canvas {
-        width: 100%;
-        height: 100%;
-      }
-requestAnimationFrame(drawRaindrops);
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #292929;
 }
 
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 
-function drawLightning(x, y) {
-  
-  var gradient = ctx.createRadialGradient(x, y, 0, x, y, 20);
-  gradient.addColorStop(0, "rgba(128, 0, 128, 0.5)");
-  gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+.flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(65, 0, 150, 0.5);
+  pointer-events: none;
+  animation: flash 0.5s linear;
+}
 
-  
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctx.lineTo(x + 20, y + 40);
-  ctx.lineTo(x + 10, y + 40);
-  ctx.lineTo(x + 30, y + 80);
-  ctx.lineTo(x + 10
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
